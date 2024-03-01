@@ -1,0 +1,53 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleEscrow {
+    address public buyer;
+    address public seller;
+    address public arbiter;
+
+    uint public depositAmount;
+    bool public isFundsReleased;
+    bool public isRefunded;
+
+    constructor(address _seller, address _arbiter) {
+        buyer = msg.sender;
+        seller = _seller;
+        arbiter = _arbiter;
+    }
+
+    function deposit() external payable onlyBuyer {
+        require(msg.value > 0, "Deposit amount should be greater than 0");
+        depositAmount += msg.value;
+    }
+
+    // Function for the seller to release funds to the buyer
+    function releaseFunds() external onlySeller {
+        require(!isFundsReleased, "Funds have already been released");
+        isFundsReleased = true;
+        payable(buyer).transfer(depositAmount);
+    }
+
+    function refundFunds() external onlyBuyerOrArbiter {
+        require(!isRefunded, "Funds have already been refunded");
+        isRefunded = true;
+        payable(buyer).transfer(depositAmount);
+    }
+
+    // Modifier to ensure only the buyer can call a function
+    modifier onlyBuyer() {
+        require(msg.sender == buyer, "Only the buyer can call this function");
+        _;
+    }
+
+   modifier onlySeller() {
+        require(msg.sender == seller, "Only the seller can call this function");
+        _;
+    }
+
+    // Modifier to ensure only the buyer or arbiter can call a function
+    modifier onlyBuyerOrArbiter() {
+        require(msg.sender == buyer || msg.sender == arbiter, "Only the buyer or arbiter can call this function");
+        _;
+    }
+}
