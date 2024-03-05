@@ -21,7 +21,6 @@ contract SimpleEscrow {
         depositAmount += msg.value;
     }
 
-    // Function for the seller to release funds to the buyer
     function releaseFunds() external onlySeller {
         require(!isFundsReleased, "Funds have already been released");
         isFundsReleased = true;
