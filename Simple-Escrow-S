@@ -33,7 +33,6 @@ contract SimpleEscrow {
         payable(buyer).transfer(depositAmount);
     }
 
-    // Modifier to ensure only the buyer can call a function
     modifier onlyBuyer() {
         require(msg.sender == buyer, "Only the buyer can call this function");
         _;
