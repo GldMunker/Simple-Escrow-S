@@ -43,8 +43,7 @@ contract SimpleEscrow {
         _;
     }
 
-    // Modifier to ensure only the buyer or arbiter can call a function
-    modifier onlyBuyerOrArbiter() {
+   modifier onlyBuyerOrArbiter() {
         require(msg.sender == buyer || msg.sender == arbiter, "Only the buyer or arbiter can call this function");
         _;
     }
