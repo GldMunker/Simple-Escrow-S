@@ -15,7 +15,7 @@ contract SimpleEscrow {
         seller = _seller;
         arbiter = _arbiter;
     }
-
+    //reward 2
     function deposit() external payable onlyBuyer {
         require(msg.value > 0, "Deposit amount should be greater than 0");
         depositAmount += msg.value;
