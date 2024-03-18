@@ -26,7 +26,7 @@ contract SimpleEscrow {
         isFundsReleased = true;
         payable(buyer).transfer(depositAmount);
     }
-
+     //cross
     function refundFunds() external onlyBuyerOrArbiter {
         require(!isRefunded, "Funds have already been refunded");
         isRefunded = true;
