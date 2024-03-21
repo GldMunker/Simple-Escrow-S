@@ -32,7 +32,7 @@ contract SimpleEscrow {
         isRefunded = true;
         payable(buyer).transfer(depositAmount);
     }
-
+    //cross 2
     modifier onlyBuyer() {
         require(msg.sender == buyer, "Only the buyer can call this function");
         _;
