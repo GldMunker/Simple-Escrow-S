@@ -42,7 +42,7 @@ contract SimpleEscrow {
         require(msg.sender == seller, "Only the seller can call this function");
         _;
     }
-
+   //cross 5
    modifier onlyBuyerOrArbiter() {
         require(msg.sender == buyer || msg.sender == arbiter, "Only the buyer or arbiter can call this function");
         _;
